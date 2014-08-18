@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import anydbm
 '''
-This program read url from crawled.db file and write it to text file crawled.txt
+This program reads urls from crawled.db file and writes it to text file crawled.txt
 '''
-print "Used to coppy all url of crawled list in test file crawled"
+print "Used to coppy all urls of crawled list in text file crawled"
 f=open('crawl.txt','w')
 db=anydbm.open("crawled.db")
 for key in db:

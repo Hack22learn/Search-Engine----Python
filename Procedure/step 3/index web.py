@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import urllib2,sys
 '''
-   Crawl A index Page and extract all keyword for it ..
+   Crawl A web Page and extract all keyword from it ..
 '''
 def union_list(keyword,keys):
     '''
@@ -13,7 +13,7 @@ def union_list(keyword,keys):
     print keyword        
 def key_from_h12(page_data,h):
     '''
-      return list of keyword
+      returns list of keywords in h1 or h2 tag
     '''
     keys=[]
     heading=0
@@ -32,7 +32,7 @@ def key_from_h12(page_data,h):
     
 def index_page(url):
     '''
-      extract keyword from page and return list of keyword
+      extract keywords from given page and return list of keywords
     '''
     try:
         try:

@@ -14,8 +14,8 @@ class Web_Crawler(object):
     
     def do_not_crawl(self,link):
         '''
-           This function used to test this is not url for any download or image or anything we donot
-           want to index by testing its end extention .i.e .img,.pdf,.css,.js
+           This function tests if a link refers to img or css or anything not important for indexing
+           it returns false else it returns true
         '''
         if link.find('nitrkl') !=-1:
             if link.find("#")!=-1 and link.find('(') == -1 and link.find(',') ==-1 and link.find("'") ==-1 and link.find('javascript') == -1:
@@ -33,8 +33,8 @@ class Web_Crawler(object):
     
     def link_create(self,cur_link,append_link):
         '''
-          for link like href="test.html"
-          it create whole link to fetch that url
+          for shortened links like href="test.html"
+          it returns full link required to fetch that page
         '''
         
         if append_link[0] not in './':
@@ -66,7 +66,7 @@ class Web_Crawler(object):
         
     def crawl_page(self,url):
         '''
-            Extract all link from given url
+            Extract all links from a given url
         '''
         try:
             response=urllib2.urlopen(url)
@@ -78,7 +78,7 @@ class Web_Crawler(object):
         start_link=-1
         while True:
             '''
-                 fetch all link this loop is continued until all link extracted
+                 fetch all links , this loop continues until all links are extracted
             '''
             start_link=page_data.find("href=",start_link+1)
             if start_link == -1:
@@ -89,7 +89,7 @@ class Web_Crawler(object):
     
                 Test_is_url=page_data[start_quote+1:end_quote]
                 
-                if (Test_is_url.find('http') !=-1): #cmake sure it is url and distinct url
+                if (Test_is_url.find('http') !=-1): #cmake sure it is a url and distinct url
                     if self.do_not_crawl(Test_is_url) and Test_is_url not in self.to_be_crawl and Test_is_url not in self.crawled:
                         self.to_be_crawl[Test_is_url]=''
                     
@@ -136,7 +136,7 @@ class Web_Crawler(object):
             self.to_be_crawl.close()
             
         except KeyboardInterrupt:
-            print 'you enter ctrl+c'
+            print 'you entered ctrl+c'
             sys.exit()
                 
             
